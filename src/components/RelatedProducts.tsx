@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { Product } from '@/types/product';
-import { getAllProducts } from '@/data/products';
+import { products } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
 
 interface RelatedProductsProps {
@@ -15,7 +15,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ productId, category }
   const navigate = useNavigate();
   
   // Get related products (same category, excluding current product)
-  const relatedProducts = getAllProducts()
+  const relatedProducts = products
     .filter(product => product.category === category && product.id !== productId)
     .slice(0, 4);
     
