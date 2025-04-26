@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Search, Menu } from 'lucide-react';
@@ -21,6 +22,7 @@ const Navbar = () => {
             alt="PixelNerd Logo" 
             className="h-10 mr-2"
           />
+          <span className="sr-only">PixelNerd</span>
         </Link>
 
         {/* Desktop Menu */}
