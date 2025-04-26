@@ -1,7 +1,6 @@
-
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { ShoppingCart, Tag, Package, Share } from 'lucide-react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { ShoppingCart, Tag, Package, Share, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useCart } from '@/context/CartContext';
@@ -14,6 +13,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   useEffect(() => {
     if (id) {
@@ -26,7 +26,6 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (product) {
-      // Add the product multiple times based on quantity
       for (let i = 0; i < quantity; i++) {
         addToCart(product);
       }
@@ -44,6 +43,15 @@ const ProductDetail = () => {
     }
   };
 
+  const handleFinalizePurchase = () => {
+    if (product) {
+      for (let i = 0; i < quantity; i++) {
+        addToCart(product);
+      }
+      navigate('/cart');
+    }
+  };
+
   if (!product) {
     return (
       <div className="container mx-auto px-4 py-16 flex justify-center items-center">
@@ -58,7 +66,6 @@ const ProductDetail = () => {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      {/* Breadcrumbs */}
       <div className="text-sm text-gray-500 mb-8">
         <Link to="/" className="hover:text-cyberpunk-neon-blue">Home</Link>
         <span className="mx-2">/</span>
@@ -68,7 +75,6 @@ const ProductDetail = () => {
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Product Image */}
         <div className="cyberpunk-card p-8 flex items-center justify-center">
           <img 
             src={product.image} 
@@ -77,7 +83,6 @@ const ProductDetail = () => {
           />
         </div>
         
-        {/* Product Info */}
         <div className="flex flex-col">
           <h1 className="text-3xl font-cyber text-white mb-4">{product.name}</h1>
           
@@ -92,7 +97,6 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* Price */}
           <div className="mb-6">
             {product.discount > 0 ? (
               <div className="flex flex-col mb-2">
@@ -121,13 +125,11 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* Description */}
           <div className="mb-8">
             <h3 className="text-xl font-cyber text-white mb-3">Descrição</h3>
             <p className="text-gray-300">{product.description}</p>
           </div>
           
-          {/* Quantity and Add to Cart */}
           <div className="mt-auto flex flex-col gap-4">
             <div className="flex items-center gap-4">
               <span className="text-gray-300">Quantidade:</span>
@@ -165,6 +167,15 @@ const ProductDetail = () => {
                 <span>Adicionar ao Carrinho</span>
               </Button>
               
+              <Button
+                onClick={handleFinalizePurchase}
+                disabled={product.stock <= 0}
+                className="flex-1 bg-cyberpunk-neon-purple text-white hover:bg-cyberpunk-neon-purple/80 font-bold py-3 rounded-md flex items-center justify-center gap-2"
+              >
+                <ArrowRight size={20} />
+                <span>Finalizar Compra</span>
+              </Button>
+
               <Button
                 variant="outline"
                 className="flex-1 border-cyberpunk-neon-purple text-cyberpunk-neon-purple hover:bg-cyberpunk-neon-purple/20 font-bold py-3 rounded-md flex items-center justify-center gap-2"
