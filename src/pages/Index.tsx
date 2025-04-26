@@ -1,12 +1,36 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import HeroSection from '@/components/HeroSection';
+import FeaturedProducts from '@/components/FeaturedProducts';
+import CategoriesSection from '@/components/CategoriesSection';
+import Newsletter from '@/components/Newsletter';
+import { getFeaturedProducts, getNewProducts } from '@/data/products';
 
 const Index = () => {
+  const featuredProducts = getFeaturedProducts();
+  const newProducts = getNewProducts();
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <HeroSection />
+      
+      <FeaturedProducts 
+        title="Produtos em Destaque" 
+        products={featuredProducts} 
+        link="/products" 
+        linkText="Ver Todos" 
+      />
+      
+      <CategoriesSection />
+      
+      <FeaturedProducts 
+        title="Novidades" 
+        products={newProducts} 
+        link="/products?filter=new" 
+        linkText="Ver Mais" 
+      />
+      
+      <Newsletter />
     </div>
   );
 };

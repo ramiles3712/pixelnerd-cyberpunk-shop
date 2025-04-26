@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,6 +53,16 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Cyberpunk theme colors
+				cyberpunk: {
+					black: '#000000',
+					'neon-blue': '#00FFFF',
+					'neon-purple': '#9D00FF',
+					'dark-purple': '#1A1F2C',
+					'light-purple': '#D6BCFA',
+					'neon-pink': '#FF00FF',
+					'dark-gray': '#222222',
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -62,6 +73,10 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
+			},
+			fontFamily: {
+				pixel: ['"Press Start 2P"', 'cursive'],
+				cyber: ['"Orbitron"', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +99,31 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'neon-pulse': {
+					'0%, 100%': { 
+						textShadow: '0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #00FFFF, 0 0 80px #00FFFF, 0 0 90px #00FFFF, 0 0 100px #00FFFF, 0 0 150px #00FFFF',
+						boxShadow: '0 0 4px #00FFFF, 0 0 11px #00FFFF'
+					},
+					'50%': { 
+						textShadow: '0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #9D00FF, 0 0 73px #9D00FF, 0 0 80px #9D00FF, 0 0 94px #9D00FF, 0 0 140px #9D00FF',
+						boxShadow: '0 0 4px #9D00FF, 0 0 11px #9D00FF'
+					}
+				},
+				'glitch': {
+					'0%': { transform: 'translate(0)' },
+					'20%': { transform: 'translate(-3px, 3px)' },
+					'40%': { transform: 'translate(-3px, -3px)' },
+					'60%': { transform: 'translate(3px, 3px)' },
+					'80%': { transform: 'translate(3px, -3px)' },
+					'100%': { transform: 'translate(0)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'neon-pulse': 'neon-pulse 2s infinite alternate',
+				'glitch': 'glitch 0.5s infinite'
 			}
 		}
 	},
