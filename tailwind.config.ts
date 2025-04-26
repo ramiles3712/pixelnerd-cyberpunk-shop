@@ -117,13 +117,25 @@ export default {
 					'60%': { transform: 'translate(3px, 3px)' },
 					'80%': { transform: 'translate(3px, -3px)' },
 					'100%': { transform: 'translate(0)' }
+				},
+				'pulse': {
+					'0%': { boxShadow: '0 0 5px #00FFFF' },
+					'50%': { boxShadow: '0 0 20px #00FFFF' },
+					'100%': { boxShadow: '0 0 5px #00FFFF' }
+				},
+				'pulse-purple': {
+					'0%': { boxShadow: '0 0 5px #9D00FF' },
+					'50%': { boxShadow: '0 0 20px #9D00FF' },
+					'100%': { boxShadow: '0 0 5px #9D00FF' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'neon-pulse': 'neon-pulse 2s infinite alternate',
-				'glitch': 'glitch 0.5s infinite'
+				'glitch': 'glitch 0.5s infinite',
+				'pulse': 'pulse 2s infinite',
+				'pulse-purple': 'pulse-purple 2s infinite'
 			}
 		}
 	},

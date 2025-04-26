@@ -5,18 +5,26 @@ import { ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
 import { Product } from '@/types/product';
+import { useToast } from "@/components/ui/use-toast";
 
 interface ProductCardProps {
   product: Product;
+  priority?: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, priority = false }) => {
   const { addToCart } = useCart();
+  const { toast } = useToast();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     addToCart(product);
+    
+    toast({
+      title: "Produto adicionado",
+      description: `${product.name} adicionado ao carrinho.`,
+    });
   };
 
   return (
@@ -31,14 +39,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           )}
           <img 
             src={product.image} 
-            alt={product.name} 
-            className="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-300" 
+            alt={`${product.name} - ${product.category} - Acessórios Gamer e Produtos Geek PixelNerd`} 
+            className="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-300"
+            loading={priority ? "eager" : "lazy"}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
             <Button 
               onClick={handleAddToCart}
               variant="default"
-              className="bg-cyberpunk-neon-blue text-black font-bold px-3 py-2 rounded-md inline-flex items-center space-x-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+              className="bg-cyberpunk-neon-blue text-black font-bold px-3 py-2 rounded-md inline-flex items-center space-x-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 animate-pulse-button"
             >
               <ShoppingCart size={16} />
               <span>Adicionar</span>

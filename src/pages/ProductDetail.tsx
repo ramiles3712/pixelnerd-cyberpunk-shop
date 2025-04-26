@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Tag, Package, Share, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,6 +7,9 @@ import { useToast } from '@/components/ui/use-toast';
 import { useCart } from '@/context/CartContext';
 import { getProductById } from '@/data/products';
 import { Product } from '@/types/product';
+
+// Lazy load components
+const RelatedProducts = lazy(() => import('@/components/RelatedProducts'));
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -78,8 +82,9 @@ const ProductDetail = () => {
         <div className="cyberpunk-card p-8 flex items-center justify-center">
           <img 
             src={product.image} 
-            alt={product.name} 
+            alt={`${product.name} - ${product.category} - PixelNerd`} 
             className="max-h-96 object-contain"
+            loading="eager"
           />
         </div>
         
@@ -161,7 +166,7 @@ const ProductDetail = () => {
               <Button
                 onClick={handleAddToCart}
                 disabled={product.stock <= 0}
-                className="flex-1 bg-cyberpunk-neon-blue text-black hover:bg-cyberpunk-neon-blue/80 font-bold py-3 rounded-md flex items-center justify-center gap-2 button-hover-effect"
+                className="flex-1 bg-cyberpunk-neon-blue text-black hover:bg-cyberpunk-neon-blue/80 font-bold py-3 rounded-md flex items-center justify-center gap-2 button-hover-effect animate-pulse-button"
               >
                 <ShoppingCart size={20} />
                 <span>Adicionar ao Carrinho</span>
@@ -170,7 +175,7 @@ const ProductDetail = () => {
               <Button
                 onClick={handleFinalizePurchase}
                 disabled={product.stock <= 0}
-                className="flex-1 bg-cyberpunk-neon-purple text-white hover:bg-cyberpunk-neon-purple/80 font-bold py-3 rounded-md flex items-center justify-center gap-2"
+                className="flex-1 bg-cyberpunk-neon-purple text-white hover:bg-cyberpunk-neon-purple/80 hover:scale-105 transition-all font-bold py-3 rounded-md flex items-center justify-center gap-2 animate-pulse-button-purple"
               >
                 <ArrowRight size={20} />
                 <span>Finalizar Compra</span>
@@ -187,6 +192,12 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+
+      <Suspense fallback={<div className="py-16 text-center text-cyberpunk-neon-blue">Carregando produtos relacionados...</div>}>
+        <div className="mt-16">
+          <RelatedProducts productId={product.id} category={product.category} />
+        </div>
+      </Suspense>
     </div>
   );
 };

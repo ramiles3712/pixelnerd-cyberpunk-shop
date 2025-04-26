@@ -93,6 +93,28 @@
   .button-hover-effect:hover {
     @apply animate-neon-pulse;
   }
+
+  .animate-pulse-button {
+    animation: pulse-blue 2s infinite;
+    box-shadow: 0 0 5px theme('colors.cyberpunk.neon-blue');
+    transition: all 0.3s ease;
+  }
+  
+  .animate-pulse-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px theme('colors.cyberpunk.neon-blue');
+  }
+  
+  .animate-pulse-button-purple {
+    animation: pulse-purple 2s infinite;
+    box-shadow: 0 0 5px theme('colors.cyberpunk.neon-purple');
+    transition: all 0.3s ease;
+  }
+  
+  .animate-pulse-button-purple:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px theme('colors.cyberpunk.neon-purple');
+  }
   
   .pixel-corners {
     clip-path: polygon(
@@ -105,5 +127,17 @@
       5px 0px,
       0px 5px
     );
+  }
+
+  @keyframes pulse-blue {
+    0% { box-shadow: 0 0 5px theme('colors.cyberpunk.neon-blue'); }
+    50% { box-shadow: 0 0 20px theme('colors.cyberpunk.neon-blue'); }
+    100% { box-shadow: 0 0 5px theme('colors.cyberpunk.neon-blue'); }
+  }
+  
+  @keyframes pulse-purple {
+    0% { box-shadow: 0 0 5px theme('colors.cyberpunk.neon-purple'); }
+    50% { box-shadow: 0 0 20px theme('colors.cyberpunk.neon-purple'); }
+    100% { box-shadow: 0 0 5px theme('colors.cyberpunk.neon-purple'); }
   }
 }
