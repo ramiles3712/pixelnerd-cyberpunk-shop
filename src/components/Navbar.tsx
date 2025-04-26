@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Search, Menu } from 'lucide-react';
@@ -17,9 +16,11 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <span className="text-2xl font-cyber font-bold neon-text-blue">
-            Pixel<span className="neon-text-purple">Nerd</span>
-          </span>
+          <img 
+            src="/logo.png" 
+            alt="PixelNerd Logo" 
+            className="h-10 mr-2"
+          />
         </Link>
 
         {/* Desktop Menu */}
